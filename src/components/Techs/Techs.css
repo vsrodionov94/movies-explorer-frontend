@@ -5,9 +5,11 @@
   display: flex;
   flex-wrap: wrap;
   flex-direction: column;
-  max-width: 1280px;
   justify-content: space-between;
   align-items: center;
+  max-width: 1280px;
+  width: 100%;
+  box-sizing: border-box;
 }
 
 .techs__title {

@@ -1,18 +1,12 @@
-import logo from "./../../images/logo.svg";
 import promoLogo from "./../../images/promo-logo.svg";
 import React from 'react';
+import Header from "../Header/Header";
 import './Promo.css';
 
 function Promo() {
   return (
     <div className="promo">
-      <header className="promo__header">
-        <img className="promo__logo" src={logo} alt="Логотип"/>
-        <div className="promo__links">
-          <a href="/sign-in" className="promo__sign-up"> Регистрация </a>
-          <a href="/sign-in" className="promo__sign-in"> Войти </a>
-        </div>
-      </header>
+      <Header />
       <div className="promo__main">
         <div>
           <h1 className="promo__title">Учебный проект студента факультета Веб-разработки.</h1>
