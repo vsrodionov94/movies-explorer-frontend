@@ -21,13 +21,11 @@
 
 .about__text-block {
   width: 50%;
-  margin-bottom: 110px;
 }
 
 .about__sub-title {
   font-size: 20px;
   font-weight: 400;
-
 }
 
 .about__text {
@@ -38,10 +36,17 @@
 .about__progress {
   display: flex;
   width: 100%;
+  font-size: 14px;
 }
 
 .about__progress-backend {
   min-width: 30%;
+}
+
+.about__blocks {
+  display: flex;
+  width: 100%;
+  margin-bottom: 110px;
 }
 
 .about__progress-backend-bar {
@@ -51,7 +56,6 @@
   line-height: 36px;
   margin-top: 0px;
   margin-bottom: 14px;
-  font-size: 14px;
   text-align: center;
   align-items: center;
 }
@@ -67,7 +71,6 @@
   line-height: 36px;
   margin-top: 0px;
   margin-bottom: 14px;
-  font-size: 14px;
   text-align: center;
   align-items: center;
 }
@@ -82,5 +85,51 @@
 @media screen and (max-width: 800px) {
   .about {
     padding: 90px 50px;
+  }
+
+  .about__blocks {
+    margin-bottom: 93px;
+  }
+}
+
+@media screen and (max-width: 480px) {
+  .about {
+    padding: 70px 14px;
+  }
+
+  .about__text {
+    font-size: 11px;
+  }
+
+  .about__sub-title {
+    font-size: 18px;
+  }
+
+  .about__title {
+    font-size: 18px;
+    min-height: 40px;
+    margin-bottom: 60px;
+  }
+
+  .about__text-block {
+    margin-bottom: 56px;
+  }
+
+  .about__text-block:last-child {
+    margin-bottom: 0px;
+  }
+
+  .about__blocks {
+    flex-direction: column;
+    align-items: center;
+    margin-bottom: 60px;
+  }
+  
+  .about__progress {
+    font-size: 11px;
+  }
+
+  .about__progress-caption {
+    font-size: 11px;
   }
 }

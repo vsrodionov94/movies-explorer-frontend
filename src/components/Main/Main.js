@@ -4,11 +4,13 @@ import Techs from './../Techs/Techs';
 import AboutMe from './../AboutMe/AboutMe';
 import Portfolio from './../Portfolio/Portfolio';
 import Footer from '../Footer/Footer';
+import Header from "../Header/Header";
 import './Main.css';
 
-function Main(){
+export default function Main(){
   return (
     <div className = "main">
+      <Header />
       <Promo />
       <AboutProject />
       <Techs />
@@ -18,5 +20,3 @@ function Main(){
     </div>
   )
 }
-
-export default Main;

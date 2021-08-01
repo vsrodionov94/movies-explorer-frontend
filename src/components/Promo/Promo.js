@@ -1,12 +1,10 @@
 import promoLogo from "./../../images/promo-logo.svg";
 import React from 'react';
-import Header from "../Header/Header";
 import './Promo.css';
 
 export default function Promo() {
   return (
     <div className="promo">
-      <Header />
       <div className="promo__main">
         <div>
           <h1 className="promo__title">Учебный проект студента факультета Веб-разработки.</h1>
