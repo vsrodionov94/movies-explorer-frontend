@@ -7,7 +7,6 @@
   box-sizing: border-box;
 }
 
-
 .portfolio__title {
   font-size: 18px;
   color: #A0A0A0;
@@ -34,4 +33,10 @@
 
 .portfolio__list:last-child {
   border-bottom: 0px;
+}
+
+@media screen and (max-width: 800px) {
+  .portfolio {
+    padding: 0 50px 90px;
+  }
 }

@@ -59,3 +59,18 @@
 .techs__list {
   margin-right: 0;
 }
+
+@media screen and (max-width: 800px) {
+  .techs {
+    padding: 90px 50px;
+  }
+  .techs__element {
+    min-width: 84px;
+    min-height: 57px;
+    font-size: 12px;
+  }
+  .techs__list {
+    margin-top: 83px;
+    padding: 0;
+  }
+}

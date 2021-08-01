@@ -3,7 +3,7 @@ import React from 'react';
 import Header from "../Header/Header";
 import './Promo.css';
 
-function Promo() {
+export default function Promo() {
   return (
     <div className="promo">
       <Header />
@@ -18,5 +18,3 @@ function Promo() {
     </div>
   )
 }
-
-export default Promo;
