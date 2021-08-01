@@ -1,21 +1,15 @@
-import Promo from './../Promo/Promo';
-import AboutProject from './../AboutProject/AboutProject';
-import Techs from './../Techs/Techs';
-import AboutMe from './../AboutMe/AboutMe';
-import Portfolio from './../Portfolio/Portfolio';
-import Footer from '../Footer/Footer';
 import Header from "../Header/Header";
+import SearchForm from '../SearchForm/SearchForm';
+import Footer from '../Footer/Footer';
+import MoviesCardList from "../MoviesCardList/MoviesCardList";
 import './Movies.css';
 
 export default function Movies(){
   return (
     <div className = "movies">
       <Header />
-      <Promo />
-      <AboutProject />
-      <Techs />
-      <AboutMe />
-      <Portfolio />
+      <SearchForm />
+      <MoviesCardList />
       <Footer />
     </div>
   )

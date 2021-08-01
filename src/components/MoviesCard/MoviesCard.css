@@ -1,0 +1,29 @@
+.card {
+  display: flex;
+  background: #F9F9F9;
+  justify-content: space-between;
+  align-items: center;
+  min-height: 134px;
+}
+
+.card__caption {
+  margin-left: 22px;
+}
+
+.card__title {
+  font-size: 18px;
+  font-weight: 500;
+  color: #000;
+}
+
+.card__photo {
+  width: 220px;
+  height: 122px;
+  margin-right: 6px;
+}
+
+.card__time {
+  font-size: 11px;
+  color: #A0A0A0;
+  font-weight: 100;
+}
