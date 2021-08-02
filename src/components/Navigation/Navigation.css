@@ -1,0 +1,55 @@
+.navigation {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  height: 74px;
+  max-width: 1280px;
+  padding: 0 70px;
+  box-sizing: border-box;
+  width: 100%;
+  font-size: 12px;
+}
+.navigation__logo {
+  width: 38px;
+  margin-right: 44px;
+}
+.navigation__links {
+  display: flex;
+  align-items: center;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+.navigation__link {
+  text-decoration: none;
+  color: #000;
+  font-size: 13px;
+  font-weight: 400;
+  display: block;
+  margin-right: 16px;
+  align-self: center;
+  text-align: center;
+}
+
+.navigation__btn {
+  width: 100px;
+  height: 30px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.navigation__btn-text {
+  color: #000;
+  font-size: 13px;
+  font-weight: 400;
+  margin: 0;
+}
+.navigation__btn-icon {
+  width: 30px;
+  height: 30px;
+  background-image: url('../../images/account-icon.svg');
+  background-repeat: no-repeat;
+  background-position: center;
+  margin: 0;
+}
