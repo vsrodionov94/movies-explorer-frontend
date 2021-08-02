@@ -1,6 +1,7 @@
 // import Main from './../Main/Main';
 // import Movies from '../Movies/Movies';
-import Profile from '../Profile/Profile';
+// import Profile from '../Profile/Profile';
+import Register from '../Register/Register';
 import './App.css';
 
 function App() {
@@ -8,7 +9,8 @@ function App() {
     <div className="App">
       {/* <Main /> */}
       {/* <Movies /> */}
-      <Profile />
+      {/* <Profile /> */}
+      <Register />
     </div>
   );
 }
