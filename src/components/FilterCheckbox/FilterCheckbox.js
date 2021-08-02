@@ -1,6 +1,10 @@
+import './FilterCheckbox.css';
 
 export default function FilterCheckbox() {
-    return (
-        <input type="checkbox" />
+  return (
+    <div>
+      <input type="checkbox" className="checkbox" id="box"/>
+      <label for="box"></label>
+    </div>
     );
   }
