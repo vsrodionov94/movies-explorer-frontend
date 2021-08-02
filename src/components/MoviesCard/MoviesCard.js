@@ -1,7 +1,7 @@
 import './MoviesCard.css';
 import photo1 from "./../../images/card-1.png";
 
-export default function MoviesCard() {
+export default function MoviesCard({card}) {
   return (
     <li className="card">
       <div className="card__caption">
