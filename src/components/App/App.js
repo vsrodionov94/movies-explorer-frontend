@@ -8,6 +8,7 @@ import Profile from './../Profile/Profile';
 import SavedMovies from './../SavedMovies/SavedMovies';
 
 import './App.css';
+import NotFound from './../NotFound/NotFound';
 
 
 function App() {
@@ -29,6 +30,9 @@ function App() {
           <Route path="/saved-movies">
             <SavedMovies />
           </Route>
+          {/* <Route path="/*">
+            <NotFound />
+          </Route> */}
           <Route path="/">
             <Main />
           </Route>
