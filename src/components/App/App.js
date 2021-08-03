@@ -4,9 +4,11 @@ import Main from './../Main/Main';
 import Movies from '../Movies/Movies';
 import Login from './../Login/Login';
 import Register from './../Register/Register';
+import Profile from './../Profile/Profile';
+import SavedMovies from './../SavedMovies/SavedMovies';
 
 import './App.css';
-import Profile from './../Profile/Profile';
+
 
 function App() {
   return (
@@ -25,7 +27,7 @@ function App() {
             <Profile />
           </Route>
           <Route path="/saved-movies">
-            <Movies />
+            <SavedMovies />
           </Route>
           <Route path="/">
             <Main />

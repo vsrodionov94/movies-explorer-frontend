@@ -1,5 +1,4 @@
 import './Profile.css';
-import Header from './../Header/Header';
 import Navigation from './../Navigation/Navigation';
 
 export default function Profile() {
