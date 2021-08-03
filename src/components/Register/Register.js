@@ -6,7 +6,7 @@ export default function Register() {
   return(
     <div className="register">
       <header className="register__header">
-        <Link className="register__logo"/>
+        <Link className="register__logo" to="/" />
         <h1 className="register__title">Добро пожаловать!</h1>
       </header>
       <form className="register__form">
