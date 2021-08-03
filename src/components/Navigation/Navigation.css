@@ -11,7 +11,9 @@
 }
 .navigation__logo {
   width: 38px;
+  height: 38px;
   margin-right: 44px;
+  background-image: url('./../../images/logo.svg');
 }
 .navigation__links {
   display: flex;
@@ -37,6 +39,7 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
+  text-decoration: none;
 }
 
 .navigation__btn-text {
@@ -51,5 +54,7 @@
   background-image: url('../../images/account-icon.svg');
   background-repeat: no-repeat;
   background-position: center;
+  background-color: #F9F9F9;
+  border-radius: 6px;
   margin: 0;
 }

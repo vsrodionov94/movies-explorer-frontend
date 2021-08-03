@@ -1,18 +1,36 @@
-// import Main from './../Main/Main';
-// import Movies from '../Movies/Movies';
-// import Profile from '../Profile/Profile';
-// import Register from '../Register/Register';
-import Navigation from '../Navigation/Navigation';
+import { Route, Switch } from "react-router-dom";
+
+import Main from './../Main/Main';
+import Movies from '../Movies/Movies';
+import Login from './../Login/Login';
+import Register from './../Register/Register';
+
 import './App.css';
+import Profile from './../Profile/Profile';
 
 function App() {
   return (
     <div className="App">
-      {/* <Main /> */}
-      {/* <Movies /> */}
-      {/* <Profile /> */}
-      {/* <Register /> */}
-      <Navigation />
+        <Switch>
+          <Route path="/movies">
+            <Movies />
+          </Route>
+          <Route path="/signin">
+            <Login />
+          </Route>
+          <Route path="/signup">
+            <Register />
+          </Route>
+          <Route path="/profile">
+            <Profile />
+          </Route>
+          <Route path="/saved-movies">
+            <Movies />
+          </Route>
+          <Route path="/">
+            <Main />
+          </Route>
+        </Switch>
     </div>
   );
 }

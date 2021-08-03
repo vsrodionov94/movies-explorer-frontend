@@ -1,14 +1,14 @@
 import React from 'react';
-import logo from "./../../images/logo.svg";
+import { Link } from "react-router-dom";
 import './Header.css';
 
 export default function Header() {
   return(
     <header className="header header__main">
-      <img className="header__logo" src={logo} alt="Логотип"/>
+      <Link className="header__logo" to="/"/>
       <div className="header__links">
-        <a href="/sign-in" className="header__sign-up"> Регистрация </a>
-        <a href="/sign-in" className="header__sign-in"> Войти </a>
+      <Link to="/signin" className="header__link"> Войти</Link>
+      <Link to="/signup" className="header__sign-up"> Регистрация </Link>
       </div>
     </header>
   );
