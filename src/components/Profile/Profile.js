@@ -1,11 +1,10 @@
 import './Profile.css';
 import Navigation from './../Navigation/Navigation';
 
-export default function Profile() {
+const Profile = () => {
   return(
-  <div>
+    <section className="profile">
     <Navigation />
-    <div className="profile">
       <h1 className="profile__title"> Привет, Виталий!</h1>
       <ul className="profile__list">
         <li className="profile__element"> 
@@ -19,7 +18,8 @@ export default function Profile() {
       </ul>
       <button className="profile__btn">Редактировать</button>
       <button className="profile__btn profile__btn_red">Выйти из аккаунта</button>
-    </div>
-  </div>
-  )
-}
+    </section>
+  );
+};
+
+export default Profile;

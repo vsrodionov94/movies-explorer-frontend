@@ -1,6 +1,6 @@
 import './FilterCheckbox.css';
 
-export default function FilterCheckbox() {
+const FilterCheckbox = () => {
   return (
     <div className="filter">
       <p className="filter__name">Короткометражки</p>
@@ -8,4 +8,6 @@ export default function FilterCheckbox() {
       <label for="box" className="filter__label" ></label>
     </div>
     );
-  }
+  };
+
+export default FilterCheckbox;

@@ -1,9 +1,9 @@
 import FilterCheckbox from '../FilterCheckbox/FilterCheckbox';
 import './SearchForm.css';
 
-export default function SearchForm() {
+const SearchForm = () => {
   return (
-    <div className="search">
+    <section className="search">
       <form className="search__form">
         <div className="search__box">
           <input className="search__input" placeholder="Фильм"/>
@@ -11,6 +11,8 @@ export default function SearchForm() {
         </div>
         <FilterCheckbox />
       </form>
-    </div>
+    </section>
   );
-}
+};
+
+export default SearchForm;

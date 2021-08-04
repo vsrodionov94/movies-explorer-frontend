@@ -1,18 +1,20 @@
 import Navigation from './../Navigation/Navigation';
 import SearchForm from '../SearchForm/SearchForm';
 import Footer from '../Footer/Footer';
-import MoviesCardList from "../MoviesCardList/MoviesCardList";
+import MoviesCardList from '../MoviesCardList/MoviesCardList';
+import MoreMovies from './../MoreMovies/MoreMovies';
 import './Movies.css';
-import Preloader from './../Preloader/Preloader';
 
-export default function Movies(){
+const Movies = () => {
   return (
-    <div className = "movies">
+    <section className = "movies">
       <Navigation />
       <SearchForm />
       <MoviesCardList />
-      <Preloader />
+      <MoreMovies />
       <Footer />
-    </div>
+    </section>
   )
-}
+};
+
+export default Movies;

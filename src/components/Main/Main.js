@@ -7,9 +7,9 @@ import Footer from '../Footer/Footer';
 import Header from "../Header/Header";
 import './Main.css';
 
-export default function Main(){
+const Main = () => {
   return (
-    <div className = "main">
+    <section className = "main">
       <Header />
       <Promo />
       <AboutProject />
@@ -17,6 +17,8 @@ export default function Main(){
       <AboutMe />
       <Portfolio />
       <Footer />
-    </div>
+    </section>
   )
-}
+};
+
+export default Main;

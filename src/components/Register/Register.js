@@ -2,9 +2,9 @@ import { Link } from "react-router-dom";
 
 import './Register.css';
 
-export default function Register() {
+const Register = () => {
   return(
-    <div className="register">
+    <section className="register">
       <header className="register__header">
         <Link className="register__logo" to="/" />
         <h1 className="register__title">Добро пожаловать!</h1>
@@ -47,6 +47,8 @@ export default function Register() {
 
       <button type="submit" className="register__button">Зарегистрироваться</button>
       <Link to="/signin" className="register__link">Уже зарегистрированы? <span className="register__text">Войти</span></Link>
-    </div>
+    </section>
   );
 };
+
+export default Register;

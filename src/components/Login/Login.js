@@ -2,9 +2,9 @@ import { Link } from "react-router-dom";
 
 import './Login.css';
 
-export default function Login() {
+const Login = () => {
   return(
-    <div className="login">
+    <section className="login">
       <header className="login__header">
         <Link to="/" className="login__logo"/>
         <h1 className="login__title">Рады видеть!</h1>
@@ -36,6 +36,8 @@ export default function Login() {
 
       <button type="submit" className="login__button">Войти</button>
       <Link to="/signup" className="login__link">Ещё не зарегистрированы? <span className="login__text">Регистрация</span></Link>
-    </div>
+    </section>
   );
 };
+
+export default Login;

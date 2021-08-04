@@ -3,12 +3,14 @@ import Footer from '../Footer/Footer';
 import MoviesCardList from "../MoviesCardList/MoviesCardList";
 import './SavedMovies.css';
 
-export default function SavedMovies() {
+const SavedMovies = () => {
   return (
-    <div className = "saved-movies">
+    <section className = "saved-movies">
       <Navigation />
       <MoviesCardList />
       <Footer />
-    </div>
-  )
-}
+    </section>
+  );
+};
+
+export default SavedMovies;

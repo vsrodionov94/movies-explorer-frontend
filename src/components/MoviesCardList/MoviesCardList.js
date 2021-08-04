@@ -1,7 +1,7 @@
 import MoviesCard from '../MoviesCard/MoviesCard';
 import './MoviesCardList.css';
 
-export default function MoviesCardList () {
+const MoviesCardList = () => {
   return (
     <section className="cards">
       <ul className="cards__list">
@@ -10,3 +10,5 @@ export default function MoviesCardList () {
     </section>  
   );
 };
+
+export default MoviesCardList;

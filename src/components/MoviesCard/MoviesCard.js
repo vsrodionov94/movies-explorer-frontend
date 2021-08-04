@@ -2,7 +2,7 @@ import './MoviesCard.css';
 import photo1 from "./../../images/card-1.png";
 import { Route } from 'react-router-dom';
 
-export default function MoviesCard({card}) {
+const MoviesCard = ({card}) => {
   return (
     <li className="card">
       <div className="card__caption">
@@ -18,4 +18,6 @@ export default function MoviesCard({card}) {
       <img className="card__photo" src={photo1} alt="33 слова о дизайне" />
     </li>
   );
-} 
+};
+
+export default MoviesCard;
