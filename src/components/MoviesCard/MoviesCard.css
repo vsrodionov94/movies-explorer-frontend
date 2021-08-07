@@ -4,6 +4,12 @@
   justify-content: space-between;
   align-items: center;
   min-height: 134px;
+  width: 100%;
+  margin-bottom: 40px;
+}
+
+.card:last-child {
+  margin-bottom: 0;
 }
 
 .card__caption {
@@ -36,10 +42,38 @@
   height: 12px;
 }
 
-.card__btn_like {
+.card__btn_active {
   background-image: url('../../images/like-active.svg');
 }
 
 .card__btn_delete {
   background-image: url('../../images/delete.svg');
+}
+
+@media screen and (max-width: 600px) {
+  .card {
+    flex-direction: column-reverse;
+    width: 300px;
+    margin-bottom: 20px;
+  }
+
+  .card__photo {
+    width: 100%;
+    height: 168px;
+    margin: 0;
+  }
+
+  .card__caption {
+    padding: 10px 16px 14px 12px;
+    margin: 0;
+    width: 100%;
+    justify-content: space-between;
+    display: flex;
+    box-sizing: border-box;
+  }
+
+  .card__title {
+    margin-top: 0;
+  }
+
 }
