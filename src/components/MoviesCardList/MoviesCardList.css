@@ -14,3 +14,9 @@
   flex-direction: column;
   list-style: none;
 }
+
+@media screen and (max-width: 800px) {
+  .cards {
+    padding: 60px 30px 10px;
+  }
+}

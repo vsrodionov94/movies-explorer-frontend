@@ -52,7 +52,7 @@
   font-weight: 400;
 }
 
-@media screen and (max-width: 770px) {
+@media screen and (max-width: 800px) {
   .filter {
     margin: 0 auto;
   }

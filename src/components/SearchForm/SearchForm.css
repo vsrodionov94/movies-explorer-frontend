@@ -41,7 +41,10 @@
   margin-right: 8px;
 }
 
-@media screen and (max-width: 770px) {
+@media screen and (max-width: 800px) {
+  .search {
+    padding: 60px 30px 10px;
+  }
   .search__form {
     flex-wrap: wrap;
     padding-bottom: 57px;

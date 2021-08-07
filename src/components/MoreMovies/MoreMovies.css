@@ -18,3 +18,9 @@
   height: 36px;
   padding: 0;
 }
+
+@media screen and (max-width: 800px) {
+  .more {
+    padding: 50px 30px 80px;
+  }
+}
