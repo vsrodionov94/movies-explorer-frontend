@@ -46,6 +46,10 @@
 }
 
 @media screen and (max-width: 800px) {
+  .promo {
+    padding: 0 30px 66px;
+  }
+
   .promo__main {
     padding-top: 140px;
     flex-direction: column-reverse;
@@ -69,8 +73,8 @@
   }
 
   .promo__image {
-    max-width: 310px;
-    max-height: 304px;
+    width: 310px;
+    height: 304px;
   }
 
   .promo__btn {
@@ -78,12 +82,25 @@
   }
 }
 
-@media screen and (max-width: 800px) {
+@media screen and (max-width: 480px) {
+  .promo {
+    padding: 0 14px 30px;
+  }
+  
+  .promo__main {
+    padding-top: 70px;
+  }
+
   .promo__title {
     font-size: 30px;
     margin: 44px auto 24px;
   }
   
+  .promo__image {
+    width: 210px;
+    height: 206px;
+  }
+
   .promo__btn {
     margin: 80px auto 0;
   }

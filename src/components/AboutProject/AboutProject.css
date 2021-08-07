@@ -113,6 +113,12 @@
 
   .about__text-block {
     margin-bottom: 56px;
+    width: 100%;
+  }
+
+  .about__sub-title {
+    margin-top: 0;
+    margin-bottom: 16px;
   }
 
   .about__text-block:last-child {
