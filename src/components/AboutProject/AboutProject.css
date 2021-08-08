@@ -21,6 +21,11 @@
 
 .about__text-block {
   width: 50%;
+  margin-right: 10px;
+}
+
+.about__text-block:last-child {
+  margin-right: 0;
 }
 
 .about__sub-title {
@@ -113,6 +118,7 @@
 
   .about__text-block {
     margin-bottom: 56px;
+    margin-right: 0px;
     width: 100%;
   }
 

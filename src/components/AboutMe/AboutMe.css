@@ -21,6 +21,7 @@
 
 .about-me__text-block {
   max-width: 600px;
+  margin-right: 10px;
 }
 
 .about-me__name {
@@ -92,7 +93,7 @@
   }
 }
 
-@media screen and (max-width: 470px) {
+@media screen and (max-width: 510px) {
   .about-me {
     padding: 70px 14px;
     justify-content: center;
@@ -102,6 +103,10 @@
     font-size: 18px;
     min-height: 50px;
     margin-bottom: 60px;
+  }
+
+  .about-me__text-block {
+    margin-right: 0;
   }
 
   .about-me__name {
