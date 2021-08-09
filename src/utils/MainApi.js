@@ -31,39 +31,24 @@ class Api extends React.Component {
     }).then(this._handleResponseData);
   }
 
-  setUserAvatar(data) {
-    return fetch(`${this._url}/users/me/avatar`, {
-      method: "PATCH",
-      headers: this._headers,
-      body: JSON.stringify(data),
-    }).then(this._handleResponseData);
-  }
-
-  getInitialCards() {
-    return fetch(`${this._url}/cards`, {
+  getInitialMovies() {
+    return fetch(`${this._url}/movies`, {
       headers: this._headers,
       method: "GET",
     }).then(this._handleResponseData);
   }
 
-  addCard(data) {
-    return fetch(`${this._url}/cards`, {
+  addMovie(data) {
+    return fetch(`${this._url}/movies`, {
       method: "POST",
       headers: this._headers,
       body: JSON.stringify(data),
     }).then(this._handleResponseData);
   }
 
-  removeCard(id) {
-    return fetch(`${this._url}/cards/${id}`, {
+  removeMovie(id) {
+    return fetch(`${this._url}/movies/${id}`, {
       method: "DELETE",
-      headers: this._headers,
-    }).then(this._handleResponseData);
-  }
-
-  changeLikeCardStatus(id, like) {
-    return fetch(`${this._url}/cards/${id}/likes`, {
-      method: like ? "PUT" : "DELETE",
       headers: this._headers,
     }).then(this._handleResponseData);
   }

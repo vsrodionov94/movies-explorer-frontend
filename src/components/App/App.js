@@ -1,4 +1,6 @@
-import { Route, Switch } from "react-router-dom";
+import { Route, Switch, ProtectedRoute} from "react-router-dom";
+import { useState } from "react";
+import { CurrentUserContext } from '../../contexts/CurrentUserContext';
 
 import Main from './../Main/Main';
 import Movies from '../Movies/Movies';
@@ -10,29 +12,33 @@ import SavedMovies from './../SavedMovies/SavedMovies';
 import './App.css';
 
 const App = () => {
+  const [currentUser, setCurrentUser] = useState({});
+
   return (
-    <div className="App">
-        <Switch>
-          <Route path="/movies">
-            <Movies />
-          </Route>
-          <Route path="/signin">
-            <Login />
-          </Route>
-          <Route path="/signup">
-            <Register />
-          </Route>
-          <Route path="/profile">
-            <Profile />
-          </Route>
-          <Route path="/saved-movies">
-            <SavedMovies />
-          </Route>
-          <Route path="/">
-            <Main />
-          </Route>
-        </Switch>
-    </div>
+    <CurrentUserContext.Provider value={currentUser}> 
+      <div className="App">
+          <Switch>
+            <Route path="/signin">
+              <Login />
+            </Route>
+            <Route path="/signup">
+              <Register />
+            </Route>
+            <ProtectedRoute path="/movies">
+              <Movies />
+            </ProtectedRoute>
+            <ProtectedRoute path="/profile">
+              <Profile />
+            </ProtectedRoute>
+            <ProtectedRoute path="/saved-movies">
+              <SavedMovies />
+            </ProtectedRoute>
+            <Route path="/">
+              <Main />
+            </Route>
+          </Switch>
+      </div>
+    </CurrentUserContext.Provider>
   );
 }
 
