@@ -58,11 +58,11 @@ class Api extends React.Component {
   }
 }
 
-const api = new Api({
+const mainApi = new Api({
   url: "https://apivsrodionov.nomoredomains.club",
   headers: {
     "Content-type": "application/json",
   },
 });
 
-export default api;
+export default mainApi;
