@@ -67,6 +67,7 @@
   font-weight: 500;
   color: #fff;
   margin: auto 0 16px;
+  cursor: pointer;
 }
 
 .login__link {

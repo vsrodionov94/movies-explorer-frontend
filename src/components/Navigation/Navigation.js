@@ -1,4 +1,4 @@
-import { Link } from 'react-router-dom';
+import { Link, Route } from 'react-router-dom';
 
 import './Navigation.css';
 import Sandwich from './../Sandwich/Sandwich';
@@ -18,8 +18,6 @@ export default function Navigation() {
           <div className="navigation__btn-icon"></div>
         </Link>
       </div>
-
-      
     </nav>
   );
 };

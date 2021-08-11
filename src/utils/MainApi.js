@@ -7,8 +7,6 @@ class Api extends React.Component {
     this._headers = config.headers;
   }
 
-  
-
   _handleResponseData(res) {
     if (res.ok) {
       return res.json();
@@ -59,7 +57,7 @@ class Api extends React.Component {
 }
 
 const mainApi = new Api({
-  url: "https://apivsrodionov.nomoredomains.club",
+  url: "http://localhost:3000",
   headers: {
     "Content-type": "application/json",
   },

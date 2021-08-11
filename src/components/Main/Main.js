@@ -5,12 +5,15 @@ import AboutMe from './../AboutMe/AboutMe';
 import Portfolio from './../Portfolio/Portfolio';
 import Footer from '../Footer/Footer';
 import Header from "../Header/Header";
+import Navigation from './../Navigation/Navigation';
 import './Main.css';
 
-const Main = () => {
+const Main = ({ loggedIn }) => {
   return (
     <section className = "main">
-      <Header />
+      {
+        loggedIn ? <Navigation /> : <Header />
+      }
       <Promo />
       <AboutProject />
       <Techs />
