@@ -47,15 +47,11 @@ const App = () => {
   const filterMovies = (movies, {name, isShort}) => {
     let filteredMovies = movies.filter(el => el.nameRU.includes(name));
     if (isShort) filteredMovies = filteredMovies.filter(el => el.duration <= 40);
-    filteredMovies.forEach(el => {
-      el.isLiked = userMovies.some(userEl => userEl.id === el.id);
-    });
     setMovies(filteredMovies);
   }
 
   const searchMovies = ({name, isShort}) => {
     moviesApi.getMoviesData().then((movies) => {
-      console.log(movies)
       movies = movies.map(movie => {
         return {
         nameRU: movie.nameRU,
@@ -76,8 +72,6 @@ const App = () => {
       alert(err);
     });
   };
-
-
 
   const handleLogin = (email, password) => {
     auth.authorize(email, password)
@@ -102,13 +96,13 @@ const App = () => {
   };
 
   const handleLikeMovie = (movie) => {
-    const isLiked = userMovies.some(el => el.movieId === movie.id);
-    console.log(movie)
+    const isLiked = userMovies.some(el => el.movieId === movie.movieId);
     if (isLiked) {
+      const movieId = userMovies.find(el => el.movieId === movie.movieId)._id;
       mainApi
-        .removeMovie(movie.id)
+        .removeMovie(movieId)
         .then((removedMovie) => {
-          const newMovies = userMovies.filter(el => el.id !== removedMovie.id)
+          const newMovies = userMovies.filter(el => el._id !== removedMovie.data._id)
           setUserMovies(newMovies);
         })
         .catch((err) => {
@@ -116,21 +110,13 @@ const App = () => {
         });
     } else {
       mainApi
-        .addMovie({
-          nameRU: movie.nameRU,
-          nameEN: movie.nameEN,
-          thumbnail: movie.thumbnail,
-          trailer: movie.trailer,
-          image: movie.image,
-          description: movie.description,
-          year: movie.year,
-          duration: movie.duration,
-          director: movie.director,
-          country: movie.country,
-          movieId: movie.movieId,
-        })
+        .addMovie(movie)
         .then((newMovie) => {
           setUserMovies([newMovie.data, ...userMovies]);
+          movies.forEach(el => {
+            if (el.movieId === newMovie.data.movieId) el = newMovie.data
+          })
+          setMovies(movies)
         })
         .catch((err) => {
           console.log(err);
@@ -192,6 +178,7 @@ const App = () => {
               getMovies={searchMovies}
               movies={movies}
               onMovieLike={handleLikeMovie}
+              userMovies={userMovies}
             />
             <ProtectedRoute
               component={SavedMovies}

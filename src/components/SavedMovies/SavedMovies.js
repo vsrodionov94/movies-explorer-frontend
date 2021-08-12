@@ -13,6 +13,7 @@ const SavedMovies = ({ getMovies, movies, onMovieLike }) => {
       <MoviesCardList 
         movies={movies} 
         onMovieLike={onMovieLike}
+        userMovies={movies}
       /> 
       : ''}
       <Footer />

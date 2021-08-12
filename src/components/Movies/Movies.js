@@ -4,7 +4,7 @@ import Footer from '../Footer/Footer';
 import MoviesCardList from '../MoviesCardList/MoviesCardList';
 import './Movies.css';
 
-const Movies = ({ getMovies, movies, onMovieLike }) => {
+const Movies = ({ getMovies, movies, onMovieLike, userMovies }) => {
   return (
     <section className = "movies">
       <Navigation />
@@ -13,6 +13,7 @@ const Movies = ({ getMovies, movies, onMovieLike }) => {
       <MoviesCardList 
         movies={movies}
         onMovieLike={onMovieLike}
+        userMovies={userMovies}
       /> 
       : ''}
       <Footer />
