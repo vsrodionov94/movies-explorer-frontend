@@ -19,10 +19,14 @@ import './App.css';
 const App = () => {
   const [currentUser, setCurrentUser] = useState({});
   // const [isInfoTooltipOpen, setIsInfoTooltipOpen] = useState(false)
+  const [search, setSearch] = useState({ name: '', isShort: false });
+  const [loading, setLoading] = useState(false);
+  const [searchError, setSearchError] = useState(false);
   const [normalRegistration, setNormalRegistration] = useState(false);
   const [loggedIn, setLoggedIn] = useState(false);
   const [userMovies, setUserMovies] = useState([]);
-  const [movies, setMovies] = useState([]);
+  const [foundMovies, setFoundMovies] = useState([]);
+  const [viewMovies, setViewMovies] = useState([]);
   const history = useHistory();
 
   useEffect(() => {
@@ -44,13 +48,23 @@ const App = () => {
     mainApi.setToken(token);
   }, []);
 
-  const filterMovies = (movies, {name, isShort}) => {
-    let filteredMovies = movies.filter(el => el.nameRU.includes(name));
-    if (isShort) filteredMovies = filteredMovies.filter(el => el.duration <= 40);
-    setMovies(filteredMovies);
+  useEffect(() => {
+    setViewMovies(foundMovies);
+  }, [foundMovies]);
+
+  useEffect(() => {
+    setViewMovies(userMovies);
+  }, [userMovies]);
+
+  const filterMovies = (movies) => {
+    let filteredMovies = movies.filter(el => el.nameRU.includes(search.name));
+    if (search.isShort) filteredMovies = filteredMovies.filter(el => el.duration <= 40);
+    setFoundMovies(filteredMovies);
   }
 
   const searchMovies = ({name, isShort}) => {
+    setSearch({name, isShort});
+    setLoading(true);
     moviesApi.getMoviesData().then((movies) => {
       movies = movies.map(movie => {
         return {
@@ -67,11 +81,20 @@ const App = () => {
         movieId: movie.id,
         }
       })
-      filterMovies(movies, {name, isShort});
+      filterMovies(movies);
     }).catch(err => {
+      setSearchError(true);
       alert(err);
+    }).finally(() => {
+      setLoading(false);
     });
   };
+
+  const searchUserMovies = ({name, isShort}) => {
+    let filteredMovies = userMovies.filter(el => el.nameRU.includes(search.name));
+    if (search.isShort) filteredMovies = filteredMovies.filter(el => el.duration <= 40);
+    setViewMovies(filteredMovies);
+  }
 
   const handleLogin = (email, password) => {
     auth.authorize(email, password)
@@ -113,10 +136,10 @@ const App = () => {
         .addMovie(movie)
         .then((newMovie) => {
           setUserMovies([newMovie.data, ...userMovies]);
-          movies.forEach(el => {
-            if (el.movieId === newMovie.data.movieId) el = newMovie.data
+          viewMovies.forEach(el => {
+            if (el.movieId === newMovie.data.movieId) el = newMovie.data;
           })
-          setMovies(movies)
+          setViewMovies(viewMovies)
         })
         .catch((err) => {
           console.log(err);
@@ -176,16 +199,21 @@ const App = () => {
               path="/movies"
               loggedIn={loggedIn}
               getMovies={searchMovies}
-              movies={movies}
+              movies={viewMovies}
               onMovieLike={handleLikeMovie}
               userMovies={userMovies}
+              loading={loading}
+              searchError={searchError}
             />
             <ProtectedRoute
               component={SavedMovies}
               path="/saved-movies"
               loggedIn={loggedIn}
-              movies={userMovies}
+              userMovies={userMovies}
+              getMovies={searchUserMovies}
+              movies={viewMovies}
               onMovieLike={handleLikeMovie}
+              loading={loading}
             />
             <Route path="/">
               <Main loggedIn={loggedIn} />

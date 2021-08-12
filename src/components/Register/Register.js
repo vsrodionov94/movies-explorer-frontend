@@ -1,31 +1,20 @@
-import { useState } from "react";
 import { Link } from "react-router-dom";
+import { useFormWithValidation } from "../../utils/validator.js";
 
 import './Register.css';
 
 const Register = ({ handleRegister }) => {
-  const [data, setData] = useState({
-    name: '',
-    email: '',
-    password: '',
-    confirmPassword: '',
-    message: ''
-  });
-
-  const handleChange = e => {
-    const {name, value} = e.target;
-    setData({
-      ...data,
-      [name]: value 
-    });
-  }
+  const { values, handleChange, errors, isValid } = useFormWithValidation();
   
   const handleSubmit = e => {
-    e.preventDefault();
-    const { name, email, password } = data;
-    handleRegister(name, email, password)
+    if (isValid) {
+      e.preventDefault();
+      const { name, email, password } = values;
+      handleRegister(name, email, password)
+    }
   }
 
+  const classBtn = isValid ? 'register__button' : 'register__button register__button_disabled'; 
   return(
     <section className="register">
       <header className="register__header">
@@ -43,12 +32,13 @@ const Register = ({ handleRegister }) => {
           required
           minLength="2"
           maxLength="30"
-          value={ data.name }
-          onChange={ handleChange}
+          value={ values.name }
+          onChange={ handleChange }
         />
+        <p class='register__field-error' id='field-name-error'>{errors.name}</p>
         <label for="field-email" className="register__label">E-mail</label>
         <input
-          type="text"
+          type="email"
           className="register__field"
           placeholder="E-mail"
           name="email"
@@ -56,9 +46,10 @@ const Register = ({ handleRegister }) => {
           required
           minLength="2"
           maxLength="30"
-          value={ data.email }
+          value={ values.email }
           onChange={ handleChange }
         />
+        <p class='register__field-error' id='field-email-error'>{errors.email}</p>
         <label for="field-password" className="register__label">Пароль</label>
         <input
           type="password"
@@ -69,11 +60,12 @@ const Register = ({ handleRegister }) => {
           required
           minLength="2"
           maxLength="20"
-          value={ data.password }
+          value={ values.password }
           onChange={ handleChange }
         />
-      <button type="submit" className="register__button">Зарегистрироваться</button>
-      <Link to="/signin" className="register__link">Уже зарегистрированы? <span className="register__text">Войти</span></Link>
+        <p class='register__field-error' id='field-password-error'>{errors.password}</p>
+        <button type="submit" className={classBtn}>Зарегистрироваться</button>
+        <Link to="/signin" className="register__link">Уже зарегистрированы? <span className="register__text">Войти</span></Link>
       </form>
 
     </section>

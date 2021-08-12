@@ -8,7 +8,7 @@ const SavedMovies = ({ getMovies, movies, onMovieLike }) => {
   return (
     <section className = "saved-movies">
       <Navigation />
-      <SearchForm />
+      <SearchForm handleSearch={getMovies}/>
       {movies.length > 0 ? 
       <MoviesCardList 
         movies={movies} 

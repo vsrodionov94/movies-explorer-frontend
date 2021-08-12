@@ -70,6 +70,13 @@
   cursor: pointer;
 }
 
+.register__button_disabled {
+  cursor: default;
+  opacity: 0.2;
+  pointer-events: none;
+  user-select: none;
+}
+
 .register__link {
   font-size: 14px;
   font-weight: 400;
@@ -79,6 +86,15 @@
 
 .register__text {
   color: #000;
+}
+
+.register__field-error {
+  width: 358px;
+  font-weight: normal;
+  font-size: 12px;
+  line-height: 15px;
+  color: #FF0000;
+  margin-top: -15px;
 }
 
 @media screen and (max-width: 400px) {
@@ -113,7 +129,9 @@
     min-width: 100%;
     box-sizing: border-box;
   }
-
+  .register__field-error {
+    min-width: 100%;
+  }
   .register__link {
     font-size: 12px;
   }
