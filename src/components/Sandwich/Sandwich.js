@@ -3,9 +3,9 @@ import './Sandwich.css';
 
 const Sandwich = () => {
   return (
-    <div class="sandwich">
+    <div className="sandwich">
       <input id="sandwich__toggle" type="checkbox" className="sandwich__toggle" />
-      <label class="sandwich__btn" for="sandwich__toggle">
+      <label className="sandwich__btn" for="sandwich__toggle">
         <span></span>
       </label>
       <section className="sandwich__box">

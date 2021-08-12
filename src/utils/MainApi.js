@@ -29,7 +29,7 @@ class Api extends React.Component {
     }).then(this._handleResponseData);
   }
 
-  getInitialMovies() {
+  getUserMovies() {
     return fetch(`${this._url}/movies`, {
       headers: this._headers,
       method: "GET",

@@ -11,9 +11,7 @@ import './Main.css';
 const Main = ({ loggedIn }) => {
   return (
     <section className = "main">
-      {
-        loggedIn ? <Navigation /> : <Header />
-      }
+      {loggedIn ? <Navigation />: <Header /> }
       <Promo />
       <AboutProject />
       <Techs />

@@ -57,8 +57,8 @@ const Login = ({ handleLogin }) => {
           value={data.password}
           onChange={handleChange}  
         />
-      <button type="submit" className="login__button">Войти</button>
-      <Link to="/signup" className="login__link">Ещё не зарегистрированы? <span className="login__text">Регистрация</span></Link>
+        <button type="submit" className="login__button">Войти</button>
+        <Link to="/signup" className="login__link">Ещё не зарегистрированы? <span className="login__text">Регистрация</span></Link>
       </form>
     </section>
   );

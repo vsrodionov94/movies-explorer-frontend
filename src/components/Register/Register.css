@@ -2,7 +2,6 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: space-between;
   padding: 70px 0 30px;
   height: 100vh;
   box-sizing: border-box;
@@ -11,8 +10,8 @@
 .register__form {
   display: flex;
   flex-direction: column;
-  justify-content: center;
   align-items: center;
+  height: 100%;
 }
 
 .register__label {
@@ -58,6 +57,7 @@
 }
 
 .register__button {
+  display: block;
   min-width: 396px;
   min-height: 45px;
   background-color: #000;
@@ -109,7 +109,6 @@
   }
 
   .register__button {
-    margin-top: auto;
     margin-bottom: 16px;
     min-width: 100%;
     box-sizing: border-box;

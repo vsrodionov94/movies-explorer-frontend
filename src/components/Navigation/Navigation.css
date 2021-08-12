@@ -7,6 +7,7 @@
   box-sizing: border-box;
   width: 100%;
   font-size: 12px;
+  background-color: inherit;
 }
 .navigation__logo {
   min-width: 38px;

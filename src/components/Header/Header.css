@@ -8,6 +8,7 @@
   width: 100%;
   font-size: 12px;
   align-items: center;
+  background-color: inherit;
 }
 .header__logo {
   width: 38px;

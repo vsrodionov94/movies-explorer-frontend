@@ -1,10 +1,10 @@
 import './FilterCheckbox.css';
 
-const FilterCheckbox = () => {
+const FilterCheckbox = ({ checkBoxRef }) => {
   return (
     <div className="filter">
       <p className="filter__name">Короткометражки</p>
-      <input type="checkbox" className="filter__checkbox" id="box"/>
+      <input type="checkbox" ref={checkBoxRef} className="filter__checkbox" id="box"/>
       <label for="box" className="filter__label" ></label>
     </div>
     );
