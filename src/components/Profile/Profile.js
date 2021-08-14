@@ -8,8 +8,7 @@ import './Profile.css';
 const Profile = ({ logOut, handleUpdateUser }) => {
   const currentUser = useContext(CurrentUserContext);
 
-  const { values, handleChange, errors, isValid } = useFormWithValidation();
-  console.log(values)
+  const { values, handleChange, isValid } = useFormWithValidation();
   const classBtn = isValid && values.name && values.email && values.name !== currentUser.name && values.email !== currentUser.email 
   ? 'profile__btn' : 'profile__btn profile__btn_disabled';
 

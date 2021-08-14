@@ -15,6 +15,7 @@ import Profile from './../Profile/Profile';
 import SavedMovies from './../SavedMovies/SavedMovies';
 
 import './App.css';
+import Popup from "../Popup/Popup";
 
 const App = () => {
   const [currentUser, setCurrentUser] = useState({});
@@ -22,11 +23,11 @@ const App = () => {
   const [search, setSearch] = useState({ name: '', isShort: false });
   const [loading, setLoading] = useState(false);
   const [searchError, setSearchError] = useState(false);
-  const [normalRegistration, setNormalRegistration] = useState(false);
+  const [popupMessage, setPopupMessage] = useState('');
+  const [isPopupOpen, setIsPopupOpen] = useState(false);
   const [loggedIn, setLoggedIn] = useState(false);
   const [userMovies, setUserMovies] = useState([]);
   const [foundMovies, setFoundMovies] = useState([]);
-  const [viewMovies, setViewMovies] = useState([]);
   const history = useHistory();
 
   useEffect(() => {
@@ -48,19 +49,15 @@ const App = () => {
     mainApi.setToken(token);
   }, []);
 
-  useEffect(() => {
-    setViewMovies(foundMovies);
-  }, [foundMovies]);
-
-  useEffect(() => {
-    setViewMovies(userMovies);
-  }, [userMovies]);
-
   const filterMovies = (movies) => {
     let filteredMovies = movies.filter(el => el.nameRU.includes(search.name));
     if (search.isShort) filteredMovies = filteredMovies.filter(el => el.duration <= 40);
     setFoundMovies(filteredMovies);
   }
+
+  const onClose = () => {
+    setIsPopupOpen(false);
+  };
 
   const searchMovies = ({name, isShort}) => {
     setSearch({name, isShort});
@@ -82,6 +79,7 @@ const App = () => {
         }
       })
       filterMovies(movies);
+      setSearch({});
     }).catch(err => {
       setSearchError(true);
       alert(err);
@@ -93,7 +91,7 @@ const App = () => {
   const searchUserMovies = ({name, isShort}) => {
     let filteredMovies = userMovies.filter(el => el.nameRU.includes(search.name));
     if (search.isShort) filteredMovies = filteredMovies.filter(el => el.duration <= 40);
-    setViewMovies(filteredMovies);
+    setUserMovies(filteredMovies);
   }
 
   const handleLogin = (email, password) => {
@@ -103,18 +101,23 @@ const App = () => {
         mainApi.setToken(localStorage.getItem('token'));
         tokenCheck();
         setLoggedIn(true);
-        history.push('/profile');
+        history.push('/movies');
       })
-      .catch(err => console.error(err));
+      .catch(err => {
+        setPopupMessage('Неверные логин или пароль');
+        setIsPopupOpen(true);
+      });
   };
 
   const handleRegister = (name, email, password) => {
     auth.register(name, email, password)
     .then(() => {
-      setNormalRegistration(true);
+      setPopupMessage('Вы успешно зарегистрированы!');
+      setIsPopupOpen(true);
     })
     .catch(err => {
-      setNormalRegistration(false);
+      setPopupMessage('Что-то пошло не так...');
+      setIsPopupOpen(true);
     });  
   };
 
@@ -136,10 +139,10 @@ const App = () => {
         .addMovie(movie)
         .then((newMovie) => {
           setUserMovies([newMovie.data, ...userMovies]);
-          viewMovies.forEach(el => {
+          foundMovies.forEach(el => {
             if (el.movieId === newMovie.data.movieId) el = newMovie.data;
-          })
-          setViewMovies(viewMovies)
+          });
+          setFoundMovies(foundMovies);
         })
         .catch((err) => {
           console.log(err);
@@ -152,9 +155,12 @@ const App = () => {
       .setUserData(data)
       .then(res => {
         setCurrentUser(res.data);
+        setPopupMessage('Данные успешно обновлены!');
+        setIsPopupOpen(true);
       })
       .catch((err) => {
-      console.log(err);
+        setPopupMessage('Что-то пошло не так...');
+        setIsPopupOpen(true);
     });
   }
 
@@ -211,7 +217,7 @@ const App = () => {
               path="/movies"
               loggedIn={loggedIn}
               getMovies={searchMovies}
-              movies={viewMovies}
+              movies={foundMovies}
               onMovieLike={handleLikeMovie}
               userMovies={userMovies}
               loading={loading}
@@ -223,7 +229,7 @@ const App = () => {
               loggedIn={loggedIn}
               userMovies={userMovies}
               getMovies={searchUserMovies}
-              movies={viewMovies}
+              movies={userMovies}
               onMovieLike={handleLikeMovie}
               loading={loading}
             />
@@ -234,6 +240,7 @@ const App = () => {
             {loggedIn ? <Redirect to="/" /> : <Redirect to="/sign-up" />}
           </Route>
           </Switch>
+          <Popup isOpen={isPopupOpen} onClose={onClose} message={ popupMessage } />
       </div>
     </CurrentUserContext.Provider>
   );

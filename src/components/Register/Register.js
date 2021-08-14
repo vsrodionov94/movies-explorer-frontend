@@ -5,7 +5,6 @@ import './Register.css';
 
 const Register = ({ handleRegister }) => {
   const { values, handleChange, errors, isValid } = useFormWithValidation();
-  console.log(values)
   const handleSubmit = e => {
     if (isValid) {
       e.preventDefault();
