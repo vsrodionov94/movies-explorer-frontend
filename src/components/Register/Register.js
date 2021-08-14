@@ -5,7 +5,7 @@ import './Register.css';
 
 const Register = ({ handleRegister }) => {
   const { values, handleChange, errors, isValid } = useFormWithValidation();
-  
+  console.log(values)
   const handleSubmit = e => {
     if (isValid) {
       e.preventDefault();
@@ -35,7 +35,7 @@ const Register = ({ handleRegister }) => {
           value={ values.name }
           onChange={ handleChange }
         />
-        <p class='register__field-error' id='field-name-error'>{errors.name}</p>
+        <p className='register__field-error' id='field-name-error'>{errors.name}</p>
         <label for="field-email" className="register__label">E-mail</label>
         <input
           type="email"
@@ -49,7 +49,7 @@ const Register = ({ handleRegister }) => {
           value={ values.email }
           onChange={ handleChange }
         />
-        <p class='register__field-error' id='field-email-error'>{errors.email}</p>
+        <p className='register__field-error' id='field-email-error'>{errors.email}</p>
         <label for="field-password" className="register__label">Пароль</label>
         <input
           type="password"
@@ -63,7 +63,7 @@ const Register = ({ handleRegister }) => {
           value={ values.password }
           onChange={ handleChange }
         />
-        <p class='register__field-error' id='field-password-error'>{errors.password}</p>
+        <p className='register__field-error' id='field-password-error'>{errors.password}</p>
         <button type="submit" className={classBtn}>Зарегистрироваться</button>
         <Link to="/signin" className="register__link">Уже зарегистрированы? <span className="register__text">Войти</span></Link>
       </form>

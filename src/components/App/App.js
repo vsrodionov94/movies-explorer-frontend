@@ -147,6 +147,17 @@ const App = () => {
     }
   }
 
+  const handleUpdateUser = (data) => {
+    mainApi
+      .setUserData(data)
+      .then(res => {
+        setCurrentUser(res.data);
+      })
+      .catch((err) => {
+      console.log(err);
+    });
+  }
+
   useEffect(() => {
     Promise.all([mainApi.getUserData(), mainApi.getUserMovies()])
       .then(([user, movies]) => {
@@ -191,7 +202,8 @@ const App = () => {
             <ProtectedRoute 
               component={Profile}
               path="/profile" 
-              loggedIn={loggedIn} 
+              loggedIn={loggedIn}
+              handleUpdateUser={ handleUpdateUser }
               logOut={logOut}
             />
             <ProtectedRoute 

@@ -35,7 +35,7 @@ const Login = ({ handleLogin }) => {
           value={values.email}
           onChange={handleChange}  
         />
-        <p class='login__field-error' id='field-email-error'>{errors.email}</p>
+        <p className='login__field-error' id='field-email-error'>{errors.email}</p>
         <label for="field-password" className="login__label">Пароль</label>
         <input
           type="password"
@@ -49,7 +49,7 @@ const Login = ({ handleLogin }) => {
           value={values.password}
           onChange={handleChange}  
         />
-        <p class='login__field-error' id='field-password-error'>{errors.password}</p>
+        <p className='login__field-error' id='field-password-error'>{errors.password}</p>
         <button type="submit" className={classBtn}>Войти</button>
         <Link to="/signup" className="login__link">Ещё не зарегистрированы? <span className="login__text">Регистрация</span></Link>
       </form>
