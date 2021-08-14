@@ -5,18 +5,19 @@ import MoviesCardList from '../MoviesCardList/MoviesCardList';
 import Preloader from './../Preloader/Preloader';
 import './Movies.css';
 
-const Movies = ({ getMovies, movies, onMovieLike, userMovies, loading, searchError }) => {
+const Movies = ({ setSearch, movies, onMovieLike, userMovies, loading, searchError, onMoreMovies }) => {
   const text = searchError ? 'Во время запроса произошла ошибка. Возможно, проблема с соединением или сервер недоступен. Подождите немного и попробуйте ещё раз' : 'Ничего не найдено';
   return (
     <section className = "movies">
       <Navigation />
-      <SearchForm handleSearch={getMovies} />
+      <SearchForm handleSearch={setSearch}  />
       {loading ? <Preloader /> : 
         movies.length > 0 ? 
         <MoviesCardList 
           movies={movies}
           onMovieLike={onMovieLike}
           userMovies={userMovies}
+          onMoreMovies={onMoreMovies}
         /> 
       : <p className="movies__result">{text}</p>}
       <Footer />

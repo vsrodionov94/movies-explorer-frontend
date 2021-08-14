@@ -19,16 +19,24 @@ import Popup from "../Popup/Popup";
 
 const App = () => {
   const [currentUser, setCurrentUser] = useState({});
-  // const [isInfoTooltipOpen, setIsInfoTooltipOpen] = useState(false)
-  const [search, setSearch] = useState({ name: '', isShort: false });
+  const [currentMoviesCount, setCurrentMoviesCount] = useState(0);
+  const [moviesCount, setMoviesCount] = useState(12);
   const [loading, setLoading] = useState(false);
   const [searchError, setSearchError] = useState(false);
   const [popupMessage, setPopupMessage] = useState('');
   const [isPopupOpen, setIsPopupOpen] = useState(false);
   const [loggedIn, setLoggedIn] = useState(false);
   const [userMovies, setUserMovies] = useState([]);
-  const [foundMovies, setFoundMovies] = useState([]);
+  const [movies, setMovies] = useState([]);
+  const [viewMovies, setViewMovies] = useState([]);
+  const [search, setSearch] = useState({name: '', isShort: false});
+
   const history = useHistory();
+
+  window.addEventListener('resize', e => {
+    if (window.innerWidth <= 768) setMoviesCount(8);
+    if (window.innerWidth <= 480) setMoviesCount(5);
+  });
 
   useEffect(() => {
     if (loggedIn) {
@@ -37,7 +45,7 @@ const App = () => {
       .catch(err => {
         alert(err);
       })
-      history.push('/');
+      history.push('/movies');
     }
   }, [loggedIn, history]);
 
@@ -48,51 +56,93 @@ const App = () => {
     }
     mainApi.setToken(token);
   }, []);
+  
+  useEffect(() => {
+    Promise.all([mainApi.getUserData(), mainApi.getUserMovies()])
+      .then(([user, movies]) => {
+        setCurrentUser(user.data);
+        setUserMovies(movies.data);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  }, [loggedIn]);
 
-  const filterMovies = (movies) => {
-    let filteredMovies = movies.filter(el => el.nameRU.includes(search.name));
-    if (search.isShort) filteredMovies = filteredMovies.filter(el => el.duration <= 40);
-    setFoundMovies(filteredMovies);
-  }
+  const tokenCheck = () => {
+    const token = localStorage.getItem('token');
+    if (token) {
+      auth.getContent(token).then(() => {
+          setLoggedIn(true);
+      })
+      .catch(err => console.error(err));
+    }
+  };
+  
+  useEffect(() => {
+    tokenCheck();
+  },[]);
+
+  const logOut = () => {
+    localStorage.clear();
+    setLoggedIn(false);
+    history.push('/signin');
+  };
 
   const onClose = () => {
     setIsPopupOpen(false);
   };
 
-  const searchMovies = ({name, isShort}) => {
-    setSearch({name, isShort});
-    setLoading(true);
-    moviesApi.getMoviesData().then((movies) => {
-      movies = movies.map(movie => {
-        return {
-        nameRU: movie.nameRU,
-        nameEN: movie.nameEN,
-        thumbnail: `https://api.nomoreparties.co${movie.image.formats.thumbnail.url}`,
-        trailer: movie.trailerLink,
-        image: `https://api.nomoreparties.co${movie.image.url}`,
-        description: movie.description,
-        year: movie.year,
-        duration: movie.duration,
-        director: movie.director,
-        country: movie.country,
-        movieId: movie.id,
-        }
-      })
-      filterMovies(movies);
-      setSearch({});
-    }).catch(err => {
-      setSearchError(true);
-      alert(err);
-    }).finally(() => {
-      setLoading(false);
-    });
+  const searchMovies = () => {
+    if (!movies || movies.length === 0) {
+      setLoading(true);
+      moviesApi.getMoviesData().then((data) => {
+        setMovies(data.map(movie => {
+          return {
+          nameRU: movie.nameRU,
+          nameEN: movie.nameEN,
+          thumbnail: `https://api.nomoreparties.co${movie.image.formats.thumbnail.url}`,
+          trailer: movie.trailerLink,
+          image: `https://api.nomoreparties.co${movie.image.url}`,
+          description: movie.description,
+          year: movie.year,
+          duration: movie.duration,
+          director: movie.director,
+          country: movie.country,
+          movieId: movie.id,
+          }
+        }));
+        setMoviesFromFilter();
+      }).catch(err => {
+        setSearchError(true);
+        alert(err);
+      }).finally(() => {
+        setLoading(false);
+      });
+    } else {
+      setMoviesFromFilter();
+    }
+  };
+  
+  const setMoviesFromFilter = () => {
+    const {name, isShort} = search;
+    let filteredMovies = movies.filter(el => el.nameRU.includes(name));
+    if (isShort) filteredMovies = filteredMovies.filter(el => el.duration <= 40);
+    setCurrentMoviesCount(moviesCount);
+    setViewMovies([]);
+    for (let i = 0; i < currentMoviesCount; i += 1) {
+      if (filteredMovies[i]) {
+        console.log(filteredMovies[i])
+        setViewMovies(oldItems => [...oldItems, filteredMovies[i]]);
+      };
+    }
   };
 
+
   const searchUserMovies = ({name, isShort}) => {
-    let filteredMovies = userMovies.filter(el => el.nameRU.includes(search.name));
-    if (search.isShort) filteredMovies = filteredMovies.filter(el => el.duration <= 40);
+    let filteredMovies = userMovies.filter(el => el.nameRU.includes(name));
+    if (isShort) filteredMovies = filteredMovies.filter(el => el.duration <= 40);
     setUserMovies(filteredMovies);
-  }
+  };
 
   const handleLogin = (email, password) => {
     auth.authorize(email, password)
@@ -139,16 +189,16 @@ const App = () => {
         .addMovie(movie)
         .then((newMovie) => {
           setUserMovies([newMovie.data, ...userMovies]);
-          foundMovies.forEach(el => {
+          movies.forEach(el => {
             if (el.movieId === newMovie.data.movieId) el = newMovie.data;
           });
-          setFoundMovies(foundMovies);
+          setMovies(movies);
         })
         .catch((err) => {
           console.log(err);
         });
     }
-  }
+  };
 
   const handleUpdateUser = (data) => {
     mainApi
@@ -162,38 +212,25 @@ const App = () => {
         setPopupMessage('Что-то пошло не так...');
         setIsPopupOpen(true);
     });
-  }
+  };
 
-  useEffect(() => {
-    Promise.all([mainApi.getUserData(), mainApi.getUserMovies()])
-      .then(([user, movies]) => {
-        setCurrentUser(user.data);
-        setUserMovies(movies.data);
-      })
-      .catch((err) => {
-        console.log(err);
-      });
-  }, [loggedIn]);
-
-  const tokenCheck = () => {
-    const token = localStorage.getItem('token');
-    if (token) {
-      auth.getContent(token).then(() => {
-          setLoggedIn(true);
-      })
-      .catch(err => console.error(err));
+  const handleMoreMovies = () => {
+    setCurrentMoviesCount(currentMoviesCount + moviesCount);
+    const {name, isShort} = search;
+    let filteredMovies = movies.filter(el => el.nameRU.includes(name));
+    if (isShort) filteredMovies = filteredMovies.filter(el => el.duration <= 40);
+    setViewMovies([]);
+    for (let i = 0; i < currentMoviesCount; i += 1) {
+      if (filteredMovies[i]) {
+        console.log(filteredMovies[i])
+        setViewMovies(oldItems => [...oldItems, filteredMovies[i]]);
+      };
     }
   };
-  
-  useEffect(() => {
-    tokenCheck();
-  },[]);
 
-  const logOut = () => {
-    localStorage.clear();
-    setLoggedIn(false);
-    history.push('/signin');
-  };
+  useEffect(() => {
+    searchMovies();
+  }, [search]);
 
   return (
     <CurrentUserContext.Provider value={currentUser}> 
@@ -216,12 +253,13 @@ const App = () => {
               component={Movies}
               path="/movies"
               loggedIn={loggedIn}
-              getMovies={searchMovies}
-              movies={foundMovies}
+              movies={viewMovies}
               onMovieLike={handleLikeMovie}
               userMovies={userMovies}
               loading={loading}
               searchError={searchError}
+              onMoreMovies={handleMoreMovies}
+              setSearch={setSearch}
             />
             <ProtectedRoute
               component={SavedMovies}
@@ -237,7 +275,7 @@ const App = () => {
               <Main loggedIn={loggedIn} />
             </Route>
             <Route exact path="/">
-            {loggedIn ? <Redirect to="/" /> : <Redirect to="/sign-up" />}
+            {loggedIn ? <Redirect to="/movies" /> : <Redirect to="/signup" />}
           </Route>
           </Switch>
           <Popup isOpen={isPopupOpen} onClose={onClose} message={ popupMessage } />

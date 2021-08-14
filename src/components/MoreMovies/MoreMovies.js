@@ -1,9 +1,9 @@
 import './MoreMovies.css'
 
-const MoreMovies = () => {
+const MoreMovies = ({onMoreMovies}) => {
   return (
     <div className="more">
-      <button className="more__btn">Ещё</button> 
+      <button className="more__btn" onClick={onMoreMovies}>Ещё</button> 
     </div>
   )
 };

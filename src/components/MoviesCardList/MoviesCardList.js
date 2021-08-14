@@ -3,7 +3,7 @@ import './MoviesCardList.css';
 import { Route } from 'react-router-dom';
 import MoreMovies from './../MoreMovies/MoreMovies';
 
-const MoviesCardList = ({ movies, onMovieLike, userMovies }) => {
+const MoviesCardList = ({ movies, onMovieLike, userMovies, onMoreMovies }) => {
   return (
     <section className="cards">
       <ul className="cards__list">
@@ -32,7 +32,9 @@ const MoviesCardList = ({ movies, onMovieLike, userMovies }) => {
           })}
         </Route>
       </ul>
-      <MoreMovies />
+      <Route path="/movies">
+        <MoreMovies onMoreMovies={onMoreMovies}/> 
+      </Route>
     </section>  
   );
 };
