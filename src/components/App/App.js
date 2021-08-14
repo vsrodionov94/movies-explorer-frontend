@@ -40,21 +40,15 @@ const App = () => {
 
   useEffect(() => {
     if (loggedIn) {
-      mainApi.getUserData().then((user) => {
-      })
-      .catch(err => {
-        alert(err);
-      })
-      history.push('/movies');
+      history.push('/movies')
     }
-  }, [loggedIn, history]);
+  });
 
   useEffect(() => {
     const token = localStorage.getItem('token');
-    if (!token){
-      return;
-    }
+    if (!token) return;
     mainApi.setToken(token);
+    tokenCheck();
   }, []);
   
   useEffect(() => {
@@ -78,10 +72,6 @@ const App = () => {
     }
   };
   
-  useEffect(() => {
-    tokenCheck();
-  },[]);
-
   const logOut = () => {
     localStorage.clear();
     setLoggedIn(false);
@@ -131,12 +121,10 @@ const App = () => {
     setViewMovies([]);
     for (let i = 0; i < currentMoviesCount; i += 1) {
       if (filteredMovies[i]) {
-        console.log(filteredMovies[i])
         setViewMovies(oldItems => [...oldItems, filteredMovies[i]]);
       };
     }
   };
-
 
   const searchUserMovies = ({name, isShort}) => {
     let filteredMovies = userMovies.filter(el => el.nameRU.includes(name));
@@ -275,8 +263,8 @@ const App = () => {
               <Main loggedIn={loggedIn} />
             </Route>
             <Route exact path="/">
-            {loggedIn ? <Redirect to="/movies" /> : <Redirect to="/signup" />}
-          </Route>
+            {loggedIn ? '' : <Redirect to="/signup" />}
+            </Route>
           </Switch>
           <Popup isOpen={isPopupOpen} onClose={onClose} message={ popupMessage } />
       </div>

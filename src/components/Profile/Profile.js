@@ -9,7 +9,7 @@ const Profile = ({ logOut, handleUpdateUser }) => {
   const currentUser = useContext(CurrentUserContext);
 
   const { values, handleChange, isValid } = useFormWithValidation();
-  const classBtn = isValid && values.name && values.email && values.name !== currentUser.name && values.email !== currentUser.email 
+  const classBtn = isValid && values.name && values.email && (values.name !== currentUser.name || values.email !== currentUser.email) 
   ? 'profile__btn' : 'profile__btn profile__btn_disabled';
 
   const handleSubmit = e => {
