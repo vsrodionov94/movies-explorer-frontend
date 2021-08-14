@@ -149,8 +149,7 @@ const App = () => {
   const handleRegister = (name, email, password) => {
     auth.register(name, email, password)
     .then(() => {
-      setPopupMessage('Вы успешно зарегистрированы!');
-      setIsPopupOpen(true);
+      handleLogin(email, password);
     })
     .catch(err => {
       setPopupMessage('Что-то пошло не так...');
