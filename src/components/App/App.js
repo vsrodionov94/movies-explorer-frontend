@@ -6,7 +6,6 @@ import mainApi from "../../utils/MainApi";
 import moviesApi from "../../utils/MoviesApi";
 import * as auth from "../../utils/Auth.js";
 
-
 import Main from './../Main/Main';
 import Movies from '../Movies/Movies';
 import Login from './../Login/Login';
@@ -33,10 +32,10 @@ const App = () => {
 
   const history = useHistory();
 
-  window.addEventListener('resize', e => {
+  window.onresize = () => {
     if (window.innerWidth <= 768) setMoviesCount(8);
     if (window.innerWidth <= 480) setMoviesCount(5);
-  });
+  };
 
   useEffect(() => {
     if (loggedIn) {
@@ -210,7 +209,6 @@ const App = () => {
     setViewMovies([]);
     for (let i = 0; i < currentMoviesCount; i += 1) {
       if (filteredMovies[i]) {
-        console.log(filteredMovies[i])
         setViewMovies(oldItems => [...oldItems, filteredMovies[i]]);
       };
     }
