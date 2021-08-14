@@ -4,7 +4,7 @@ import MoviesCardList from "../MoviesCardList/MoviesCardList";
 import './SavedMovies.css';
 import SearchForm from './../SearchForm/SearchForm';
 
-const SavedMovies = ({ getMovies, movies, onMovieLike }) => {
+const SavedMovies = ({ getMovies, movies, onMovieLike, foundMovies }) => {
   return (
     <section className = "saved-movies">
       <Navigation />
@@ -14,6 +14,7 @@ const SavedMovies = ({ getMovies, movies, onMovieLike }) => {
         movies={movies} 
         onMovieLike={onMovieLike}
         userMovies={movies}
+        foundMovies={foundMovies}
       /> 
       : ''}
       <Footer />

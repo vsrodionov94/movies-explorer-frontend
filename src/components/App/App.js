@@ -28,6 +28,8 @@ const App = () => {
   const [userMovies, setUserMovies] = useState([]);
   const [movies, setMovies] = useState([]);
   const [viewMovies, setViewMovies] = useState([]);
+  const [foundMovies, setFoundMovies] = useState([]);
+  const [foundUserMovies, setFoundUserMovies] = useState([]);
   const [search, setSearch] = useState({name: '', isShort: false});
 
   const history = useHistory();
@@ -39,9 +41,10 @@ const App = () => {
 
   useEffect(() => {
     if (loggedIn) {
-      history.push('/movies')
+      history.push('/movies');
     }
-  });
+  }, [loggedIn]);
+
 
   useEffect(() => {
     const token = localStorage.getItem('token');
@@ -59,6 +62,15 @@ const App = () => {
       .catch((err) => {
         console.log(err);
       });
+  }, [loggedIn]);
+
+  useEffect(() => {
+    const localFoundMovies = JSON.parse(localStorage.getItem('foundMovies'));
+    if (localFoundMovies) {
+      setFoundMovies(localFoundMovies)
+      setCurrentMoviesCount(moviesCount);
+      renderMovies();
+    }
   }, [loggedIn]);
 
   const tokenCheck = () => {
@@ -82,10 +94,11 @@ const App = () => {
   };
 
   const searchMovies = () => {
-    if (!movies || movies.length === 0) {
+    const localMovies = JSON.parse(localStorage.getItem('movies'));
+    if (!localMovies) {
       setLoading(true);
       moviesApi.getMoviesData().then((data) => {
-        setMovies(data.map(movie => {
+        const initialMovies = data.map(movie => {
           return {
           nameRU: movie.nameRU,
           nameEN: movie.nameEN,
@@ -99,7 +112,9 @@ const App = () => {
           country: movie.country,
           movieId: movie.id,
           }
-        }));
+        });
+        setMovies(initialMovies);
+        localStorage.setItem('movies', JSON.stringify(initialMovies));
         setMoviesFromFilter();
       }).catch(err => {
         setSearchError(true);
@@ -108,6 +123,7 @@ const App = () => {
         setLoading(false);
       });
     } else {
+      setMovies(localMovies);
       setMoviesFromFilter();
     }
   };
@@ -116,19 +132,25 @@ const App = () => {
     const {name, isShort} = search;
     let filteredMovies = movies.filter(el => el.nameRU.includes(name));
     if (isShort) filteredMovies = filteredMovies.filter(el => el.duration <= 40);
+    setFoundMovies(filteredMovies);
+    localStorage.setItem('foundMovies', JSON.stringify(filteredMovies));
     setCurrentMoviesCount(moviesCount);
+    renderMovies()
+  };
+
+  const renderMovies = () => {
     setViewMovies([]);
     for (let i = 0; i < currentMoviesCount; i += 1) {
-      if (filteredMovies[i]) {
-        setViewMovies(oldItems => [...oldItems, filteredMovies[i]]);
+      if (foundMovies[i]) {
+        setViewMovies(oldItems => [...oldItems, foundMovies[i]]);
       };
     }
-  };
+  }
 
   const searchUserMovies = ({name, isShort}) => {
     let filteredMovies = userMovies.filter(el => el.nameRU.includes(name));
     if (isShort) filteredMovies = filteredMovies.filter(el => el.duration <= 40);
-    setUserMovies(filteredMovies);
+    setFoundUserMovies(filteredMovies);
   };
 
   const handleLogin = (email, password) => {
@@ -166,6 +188,7 @@ const App = () => {
         .then((removedMovie) => {
           const newMovies = userMovies.filter(el => el._id !== removedMovie.data._id)
           setUserMovies(newMovies);
+          setFoundUserMovies([]);
         })
         .catch((err) => {
           console.log(err);
@@ -175,6 +198,7 @@ const App = () => {
         .addMovie(movie)
         .then((newMovie) => {
           setUserMovies([newMovie.data, ...userMovies]);
+          setFoundUserMovies([]);
           movies.forEach(el => {
             if (el.movieId === newMovie.data.movieId) el = newMovie.data;
           });
@@ -214,7 +238,7 @@ const App = () => {
   };
 
   useEffect(() => {
-    searchMovies();
+    if (search.name) searchMovies();
   }, [search]);
 
   return (
@@ -239,12 +263,14 @@ const App = () => {
               path="/movies"
               loggedIn={loggedIn}
               movies={viewMovies}
+              foundMovies={foundMovies}
               onMovieLike={handleLikeMovie}
               userMovies={userMovies}
               loading={loading}
               searchError={searchError}
               onMoreMovies={handleMoreMovies}
               setSearch={setSearch}
+              search={search}
             />
             <ProtectedRoute
               component={SavedMovies}
@@ -253,6 +279,7 @@ const App = () => {
               userMovies={userMovies}
               getMovies={searchUserMovies}
               movies={userMovies}
+              foundMovies={foundUserMovies}
               onMovieLike={handleLikeMovie}
               loading={loading}
             />

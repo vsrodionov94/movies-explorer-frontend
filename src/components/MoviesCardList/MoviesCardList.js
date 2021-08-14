@@ -3,7 +3,7 @@ import './MoviesCardList.css';
 import { Route } from 'react-router-dom';
 import MoreMovies from './../MoreMovies/MoreMovies';
 
-const MoviesCardList = ({ movies, onMovieLike, userMovies, onMoreMovies }) => {
+const MoviesCardList = ({ movies, onMovieLike, userMovies, onMoreMovies, foundMovies }) => {
   return (
     <section className="cards">
       <ul className="cards__list">
@@ -20,7 +20,18 @@ const MoviesCardList = ({ movies, onMovieLike, userMovies, onMoreMovies }) => {
           })}
         </Route>
         <Route path="/saved-movies">
-          {movies.map(el => {
+          {foundMovies.length > 0 ?
+          foundMovies.map(el => {
+            return (
+              <MoviesCard
+                key={el.movieId}
+                movie={el}
+                onMovieLike={onMovieLike}
+                userMovies={movies}
+              />
+            );
+          })
+          : movies.map(el => {
               return (
                 <MoviesCard
                   key={el.movieId}
@@ -33,7 +44,7 @@ const MoviesCardList = ({ movies, onMovieLike, userMovies, onMoreMovies }) => {
         </Route>
       </ul>
       <Route path="/movies">
-        <MoreMovies onMoreMovies={onMoreMovies}/> 
+        {movies.length < foundMovies.length ? <MoreMovies onMoreMovies={onMoreMovies}/> : ''}
       </Route>
     </section>  
   );
