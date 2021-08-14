@@ -57,7 +57,7 @@ class Api extends React.Component {
 }
 
 const mainApi = new Api({
-  url: "http://localhost:3000",
+  url: "https://api.movies.nomoredomains.monster/",
   headers: {
     "Content-type": "application/json",
   },
