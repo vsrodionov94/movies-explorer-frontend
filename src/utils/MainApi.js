@@ -57,7 +57,7 @@ class Api extends React.Component {
 }
 
 const mainApi = new Api({
-  url: "https://api.movies.nomoredomains.monster/",
+  url: "https://api.movies.nomoredomains.monster",
   headers: {
     "Content-type": "application/json",
   },

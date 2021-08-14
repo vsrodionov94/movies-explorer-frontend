@@ -1,4 +1,4 @@
-const BASE_URL = 'https://api.movies.nomoredomains.monster/';
+const BASE_URL = 'https://api.movies.nomoredomains.monster';
 
 const checkResponse = (res) => res.ok ? res.json() : Promise.reject(`Ошибка: ${res.status}`);
 
