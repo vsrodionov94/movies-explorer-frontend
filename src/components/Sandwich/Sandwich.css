@@ -65,7 +65,7 @@
 }
 
 .sandwich__toggle:checked ~ .sandwich__btn {
-  background-image: url('../../images/sandwich-close.png');
+  background-image: url('../../images/close.png');
 }
 
 .sandwich__toggle:checked ~ .sandwich__bg {

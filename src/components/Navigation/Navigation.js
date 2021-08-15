@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import './Navigation.css';
 import Sandwich from './../Sandwich/Sandwich';
 
-export default function Navigation() {
+const Navigation = () => {
   return (
     <nav className="navigation">
       <Link className="navigation__logo" to="/"/>
@@ -18,8 +18,8 @@ export default function Navigation() {
           <div className="navigation__btn-icon"></div>
         </Link>
       </div>
-
-      
     </nav>
   );
 };
+
+export default Navigation;

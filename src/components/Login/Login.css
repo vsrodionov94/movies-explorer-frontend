@@ -11,8 +11,8 @@
 .login__form {
   display: flex;
   flex-direction: column;
-  justify-content: center;
   align-items: center;
+  height: 100%;
 }
 
 .login__label {
@@ -67,6 +67,7 @@
   font-weight: 500;
   color: #fff;
   margin: auto 0 16px;
+  cursor: pointer;
 }
 
 .login__link {
@@ -79,6 +80,23 @@
 .login__text {
   color: #000;
 }
+
+.login__field-error {
+  width: 358px;
+  font-weight: normal;
+  font-size: 12px;
+  line-height: 15px;
+  color: #FF0000;
+  margin-top: -15px;
+}
+
+.login__button_disabled {
+  cursor: default;
+  opacity: 0.2;
+  pointer-events: none;
+  user-select: none;
+}
+
 
 @media screen and (max-width: 400px) {
   .login__header {
@@ -112,6 +130,10 @@
     margin-bottom: 16px;
     min-width: 100%;
     box-sizing: border-box;
+  }
+
+  .login__field-error {
+    min-width: 100%;
   }
 
   .login__link {

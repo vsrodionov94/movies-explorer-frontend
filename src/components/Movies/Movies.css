@@ -1,7 +1,11 @@
 .movies {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    min-width: 320px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  min-width: 320px;
+}
+
+.movies__result {
+  color: #000000;
 }

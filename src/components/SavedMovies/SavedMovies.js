@@ -4,12 +4,19 @@ import MoviesCardList from "../MoviesCardList/MoviesCardList";
 import './SavedMovies.css';
 import SearchForm from './../SearchForm/SearchForm';
 
-const SavedMovies = () => {
+const SavedMovies = ({ getMovies, movies, onMovieLike, foundMovies }) => {
   return (
     <section className = "saved-movies">
       <Navigation />
-      <SearchForm />
-      <MoviesCardList />
+      <SearchForm handleSearch={getMovies}/>
+      {movies.length > 0 ? 
+      <MoviesCardList 
+        movies={movies} 
+        onMovieLike={onMovieLike}
+        userMovies={movies}
+        foundMovies={foundMovies}
+      /> 
+      : ''}
       <Footer />
     </section>
   );

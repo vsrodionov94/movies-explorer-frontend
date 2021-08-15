@@ -2,7 +2,6 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: space-between;
   padding: 70px 0 30px;
   height: 100vh;
   box-sizing: border-box;
@@ -11,8 +10,8 @@
 .register__form {
   display: flex;
   flex-direction: column;
-  justify-content: center;
   align-items: center;
+  height: 100%;
 }
 
 .register__label {
@@ -58,6 +57,7 @@
 }
 
 .register__button {
+  display: block;
   min-width: 396px;
   min-height: 45px;
   background-color: #000;
@@ -67,6 +67,14 @@
   font-weight: 500;
   color: #fff;
   margin: auto 0 16px;
+  cursor: pointer;
+}
+
+.register__button_disabled {
+  cursor: default;
+  opacity: 0.2;
+  pointer-events: none;
+  user-select: none;
 }
 
 .register__link {
@@ -78,6 +86,15 @@
 
 .register__text {
   color: #000;
+}
+
+.register__field-error {
+  width: 358px;
+  font-weight: normal;
+  font-size: 12px;
+  line-height: 15px;
+  color: #FF0000;
+  margin-top: -15px;
 }
 
 @media screen and (max-width: 400px) {
@@ -108,12 +125,13 @@
   }
 
   .register__button {
-    margin-top: auto;
     margin-bottom: 16px;
     min-width: 100%;
     box-sizing: border-box;
   }
-
+  .register__field-error {
+    min-width: 100%;
+  }
   .register__link {
     font-size: 12px;
   }
